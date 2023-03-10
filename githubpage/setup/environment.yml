@@ -1,0 +1,11 @@
+name: githubpage
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip:
+    - jupyter
+    - plotly
+    - jupyterlab
+    - pandas
