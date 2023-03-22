@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IFrame Demo</title>
+	<style>
+		#dropdown-container {
+			padding-top: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>IFrame Demo</h1>
+
+	<div id="dropdown-container">
+		<select id="frame-selector" onchange="showFrame()">
+			<option value="frame1" selected>Calculator</option>
+			<option value="frame2">Calendar</option>
+			<option value="frame3">Physics knowledge</option>
+			<option value="frame4">Linguistics Knowledge</option>
+		</select>
+	</div>
+
+	<iframe id="frame1" src="calculator.html" width="800" height="700"></iframe>
+	<iframe id="frame2" src="calendar.html" width="800" height="700" style="display:none;"></iframe>
+	<iframe id="frame3" src="physics.html" width="800" height="700" style="display:none;"></iframe>
+	<iframe id="frame4" src="linguistics.html" width="800" height="700" style="display:none;"></iframe>
+
+	<script>
+		function showFrame() {
+			var selector = document.getElementById("frame-selector");
+			var value = selector.value;
+			var frame = document.getElementById(value);
+			var iframes = document.getElementsByTagName("iframe");
+
+			for (var i = 0; i < iframes.length; i++) {
+				iframes[i].style.display = "none";
+			}
+
+			frame.style.display = "block";
+		}
+
+		// show the first iframe by default when the page first loads
+		document.getElementById("frame2").style.display = "none";
+		document.getElementById("frame3").style.display = "none";
+		document.getElementById("frame4").style.display = "none";
+	</script>
+</body>
+</html>
