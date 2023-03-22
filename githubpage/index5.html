@@ -7,6 +7,26 @@
 			padding-top: 20px;
 			text-align: center;
 		}
+		iframe{
+			width: 100%;
+		}
+		#frame-selector {
+      font-size: 16px;
+      padding: 10px 30px 10px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+      background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /* style the options in the frame selector */
+    #frame-selector option {
+      font-size: 12px;
+      background-color: #f5f5f5;
+    }
 	</style>
 </head>
 <body>
@@ -22,9 +42,9 @@
 	</div>
 
 	<iframe id="frame1" src="calculator.html" width="800" height="700"></iframe>
-	<iframe id="frame2" src="calendar.html" width="800" height="700" style="display:none;"></iframe>
-	<iframe id="frame3" src="physics.html" width="800" height="700" style="display:none;"></iframe>
-	<iframe id="frame4" src="linguistics.html" width="800" height="700" style="display:none;"></iframe>
+	<iframe id="frame2" src="calendar.html" width="800" height="700" ></iframe>
+	<iframe id="frame3" src="physics.html" width="800" height="700"></iframe>
+	<iframe id="frame4" src="linguistics.html" width="800" height="700" ></iframe>
 
 	<script>
 		function showFrame() {
@@ -40,10 +60,7 @@
 			frame.style.display = "block";
 		}
 
-		// show the first iframe by default when the page first loads
-		document.getElementById("frame2").style.display = "none";
-		document.getElementById("frame3").style.display = "none";
-		document.getElementById("frame4").style.display = "none";
+
 	</script>
 </body>
 </html>
