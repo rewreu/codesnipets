@@ -5,19 +5,20 @@ import pandas as pd
 # Load data
 df = pd.read_csv('data.csv')
 
-# Create list to hold data for each year
+# Create list to hold data for each date
 data_slider = []
 
-# Create data for each year
-for year in df['year'].unique():
-    df_year = df[df['year'] == year]
+# Create data for each date
+for date in df['date'].unique():
+    df_date = df[df['date'] == date]
     
     data = dict(
         type='choropleth',
-        locations=df_year['state_code'],
-        z=df_year['population'],
+        locations=df_date['state_code'],
+        z=df_date['population'],
+        text=df_date['population'],
         locationmode='USA-states',
-        name=str(year)
+        name=str(date)
     )
     
     data_slider.append(data)
@@ -28,7 +29,7 @@ for i in range(len(data_slider)):
     step = dict(
         method='restyle',
         args=['visible', [False] * len(data_slider)],
-        label=str(i + df['year'].min())
+        label=str(df['date'].unique()[i])
     )
     step['args'][1][i] = True
     steps.append(step)
