@@ -1,6 +1,4 @@
-Unfortunately, it is not possible to add text annotations directly on a choropleth map using Plotly. However, you can use the `scattergeo` trace type to add text annotations to the map by setting the `lat` and `lon` parameters to the latitude and longitude coordinates of the state centroids and setting the `text` parameter to the population data. Here's an example code that shows how to do this:
 
-```python
 import plotly.graph_objs as go
 import pandas as pd
 
@@ -64,8 +62,4 @@ fig = go.Figure(data=data_slider, layout=layout)
 
 # Show figure
 fig.show()
-```
 
-This code is similar to the previous example, but with the addition of creating a `scattergeo` trace for each date to add text annotations to the map. The `lat` and `lon` parameters of the `scattergeo` trace are set to the latitude and longitude coordinates of the state centroids and the `text` parameter is set to the population data. This will display the population number for each state on the choropleth map.
-
-I hope this helps! Let me know if you have any questions.
