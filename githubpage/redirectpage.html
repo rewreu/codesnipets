@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Redirect Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Model Redirect Page</h2>
+
+        <!-- Model 1 Input Field and Button -->
+        <div>
+            <h3>Model 1</h3>
+            <input type="text" id="model1Input" placeholder="Enter text for Model 1">
+            <button onclick="redirectModel1()">Go to Model 1</button>
+        </div>
+
+        <!-- Model 2 Input Field and Button -->
+        <div>
+            <h3>Model 2</h3>
+            <input type="text" id="model2Input" placeholder="Enter text for Model 2">
+            <button onclick="redirectModel2()">Go to Model 2</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectModel1() {
+            var inputText = document.getElementById('model1Input').value;
+            if (inputText) {
+                window.open('https://www.modelrun.com/model1/' + inputText, '_blank');
+            } else {
+                alert("Please enter text for Model 1.");
+            }
+        }
+
+        function redirectModel2() {
+            var inputText = document.getElementById('model2Input').value;
+            if (inputText) {
+                window.open('https://www.modelrun.com/model2/' + inputText, '_blank');
+            } else {
+                alert("Please enter text for Model 2.");
+            }
+        }
+    </script>
+</body>
+</html>
