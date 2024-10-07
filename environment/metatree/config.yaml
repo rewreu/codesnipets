@@ -1,0 +1,61 @@
+dataset:
+  name: null
+  config_name: null
+  train_file: null
+  validation_file: null
+  validation_split_percentage: 5
+
+model:
+  model_name_or_path: null
+  config_name: null
+  tokenizer_name: null
+  use_slow_tokenizer: false
+  model_type: null
+  block_size: null
+
+training:
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
+  learning_rate: 5e-5
+  weight_decay: 0.0
+  num_train_epochs: 3
+  max_train_steps: null
+  max_eval_steps: null
+  gradient_accumulation_steps: 1
+  lr_scheduler_type: "linear"
+  num_warmup_steps: 0
+  output_dir: null
+  seed: null
+  preprocessing_num_workers: 4
+  overwrite_cache: false
+  push_to_hub: false
+  hub_model_id: null
+  hub_token: null
+  checkpointing_steps: null
+  resume_from_checkpoint: null
+  with_tracking: false
+  report_to: "all"
+  low_cpu_mem_usage: false
+
+optimization:
+  n_feature: 16
+  n_class: 10
+  depth: 2
+  n_episode: 1000
+  sigma: 0.1
+  normalize: false
+
+advanced_options:
+  deepspeed: false
+  gradient_checkpointing: false
+  load_from_local: false
+  inference_only: false
+  backward_window: 0
+  num_hidden_layers: 2
+  num_heads: 12
+  hidden_size: 256
+  eval_on_train: false
+  clean_label: false
+  no_mapping: false
+  inference_topk_sample: false
+  data_filter_threshold: 0.0
