@@ -17,6 +17,28 @@ def print_tree(tree, node=0, indent=""):
 
 # Usage example:
 # print_tree(your_decision_tree)
+def print_tree(tree, node=0, indent=""):
+    depth = tree.depth
+    # Check if node index corresponds to a leaf.
+    if node >= (2**depth - 1):
+        leaf_idx = node - (2**depth - 1)
+        # Convert tensor to list for a clear multi-class display.
+        leaf_values = tree.leaf_node_labels[leaf_idx].squeeze().tolist()
+        formatted_leaf = "[" + ", ".join(f"{v:.2f}" for v in leaf_values) + "]"
+        print(indent + f"Leaf: {formatted_leaf}")
+    else:
+        feature_idx = tree.auto_dims[node].argmax().item()
+        threshold = tree.auto_thresholds[node].item()
+        print(indent + f"Node {node}: X[{feature_idx}] < {threshold:.3f}?")
+        # Print True branch
+        print(indent + "  True ->")
+        print_tree(tree, 2 * node + 1, indent + "    ")
+        # Print False branch
+        print(indent + "  False ->")
+        print_tree(tree, 2 * node + 2, indent + "    ")
+
+# Example usage:
+# print_tree(your_decision_tree)
 
 import graphviz
 
