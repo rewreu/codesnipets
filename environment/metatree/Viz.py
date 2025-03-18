@@ -135,3 +135,64 @@ def visualize_decision_tree(tree):
 # Example usage:
 # viz = visualize_decision_tree(your_decision_tree)
 # viz.render("tree_visualization", format="png", view=True)
+
+
+import graphviz
+
+def visualize_decision_tree(tree, split_threshold=3):
+    """
+    Visualizes a custom DecisionTree instance using Graphviz.
+
+    Parameters:
+      - tree: an instance of your DecisionTree.
+      - split_threshold: if the number of values in a leaf exceeds this, split into two lines.
+      
+    Assumptions:
+      - tree.auto_dims is a list of tensors for internal (decision) nodes.
+      - tree.auto_thresholds is a list of tensors for internal nodes.
+      - tree.leaf_node_labels is a list of leaf node predictions (as tensors).
+      - The binary tree structure follows: for a node at index i,
+          left child is at 2*i + 1 and right child at 2*i + 2.
+      - For multi-class outputs, each leaf holds a vector (e.g., probability distribution).
+    """
+    depth = tree.depth
+    dot = graphviz.Digraph()
+
+    # Add internal (decision) nodes: indices 0 to (2**depth - 2)
+    for i in range(2**depth - 1):
+        feature_idx = tree.auto_dims[i].argmax().item()
+        threshold = tree.auto_thresholds[i].item()
+        label = f"X[{feature_idx}] < {threshold:.3f}?"
+        dot.node(str(i), label)
+
+    # Add leaf nodes: indices from 2**depth - 1 to 2**(depth+1) - 2
+    for i in range(2**depth - 1, 2**(depth+1) - 1):
+        leaf_idx = i - (2**depth - 1)
+        leaf_tensor = tree.leaf_node_labels[leaf_idx]
+        leaf_values = leaf_tensor.squeeze().tolist()
+        if not isinstance(leaf_values, list):
+            leaf_values = [leaf_values]
+
+        # If there are more than split_threshold values, split into two lines.
+        if len(leaf_values) > split_threshold:
+            half = len(leaf_values) // 2 + len(leaf_values) % 2
+            first_line = ", ".join(f"{v:.2f}" for v in leaf_values[:half])
+            second_line = ", ".join(f"{v:.2f}" for v in leaf_values[half:])
+            formatted_leaf = f"[{first_line}]\n[{second_line}]"
+        else:
+            formatted_leaf = "[" + ", ".join(f"{v:.2f}" for v in leaf_values) + "]"
+            
+        dot.node(str(i), f"Leaf:\n{formatted_leaf}")
+
+    # Add edges for internal nodes.
+    for i in range(2**depth - 1):
+        left = 2 * i + 1
+        right = 2 * i + 2
+        dot.edge(str(i), str(left), label="True")
+        dot.edge(str(i), str(right), label="False")
+
+    return dot
+
+# Example usage:
+# viz = visualize_decision_tree(your_decision_tree)
+# viz.render("tree_visualization", format="png", view=True)
