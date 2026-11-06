@@ -1,0 +1,85 @@
+{
+  "tested_date": "2026-11-05",
+  "python": "3.12.3",
+  "platform": "Ubuntu on WSL2",
+  "packages": {
+    "structured-data-models": "0.2.1",
+    "torch": "2.7.1+cu118",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "huggingface-hub": "2.4.0"
+  },
+  "example_sha256": "4b9d2d25f358541d743cba1a7999f6a8d595d31db517e39e26e17b0dd38b3dfc",
+  "real_model_runs": [
+    {
+      "device": "cpu",
+      "gpu": null,
+      "mode": "both",
+      "status": "passed",
+      "shapes": {
+        "relational_embeddings": [
+          4,
+          512
+        ],
+        "contextual_embeddings": [
+          4,
+          512
+        ]
+      },
+      "max_probability_difference_with_hooks": 0.0
+    },
+    {
+      "device": "cuda",
+      "gpu": "NVIDIA GeForce GTX 1080 Ti",
+      "mode": "both",
+      "status": "passed",
+      "shapes": {
+        "relational_embeddings": [
+          4,
+          512
+        ],
+        "contextual_embeddings": [
+          4,
+          512
+        ]
+      },
+      "max_probability_difference_with_hooks": 0.0
+    }
+  ],
+  "standalone_checks": [
+    {
+      "mode": "relational",
+      "status": "passed",
+      "isolated_single_file": true,
+      "shapes": {
+        "relational_embeddings": [
+          4,
+          512
+        ]
+      },
+      "max_probability_difference_with_hooks": 0.0
+    },
+    {
+      "mode": "contextual",
+      "status": "passed",
+      "isolated_single_file": true,
+      "shapes": {
+        "contextual_embeddings": [
+          4,
+          512
+        ]
+      },
+      "max_probability_difference_with_hooks": 0.0
+    }
+  ],
+  "unit_tests": {
+    "command": "python -m unittest -v test_embeddings.py",
+    "passed": 5,
+    "failed": 0
+  },
+  "notes": [
+    "CPU execution used the same installed PyTorch 2.7.1+cu118 build as CUDA execution.",
+    "Standalone checks copied only example_embeddings.py into an empty temporary directory; existing installed packages and the Hugging Face cache were reused.",
+    "This checks embedding extraction and unchanged predictions; it does not evaluate embedding similarity quality."
+  ]
+}
